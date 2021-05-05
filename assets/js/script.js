@@ -13,14 +13,21 @@ function moveISS() {
   setTimeout(moveISS, 5000);
 }
 
+var myIcon = L.icon({
+    iconUrl: './assets/imgs/ISS-Icon.png',
+    iconSize: [50, 50],
+    iconAnchor: [0, 0],
+    popupAnchor: [0, 0],
+});
+
 var map = L.map("liveMap").setView([0, 0], 2);
-var iss = L.marker([0, 0]).addTo(map);
+var iss = L.marker([0, 0], {icon: myIcon}).addTo(map);
 var isscirc = L.circle([0, 0], 2200e3, {
   color: "#c22",
-  opacity: 0.3,
-  weight: 1,
+  opacity: 0.0,
+  weight: 0,
   fillColor: "#c22",
-  fillOpacity: 0.1,
+  fillOpacity: 0.0,
 }).addTo(map);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}", {
