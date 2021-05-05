@@ -3,6 +3,7 @@ var userForm = document.querySelector("#submitForm");
 var addressInput = document.querySelector("#addressArea");
 var cityInput = document.querySelector("#cityArea");
 var stateInput = document.querySelector("#stateArea");
+var zipInput = document.querySelector("#zipArea");
 
 //captures user address
 var inputHandler = function (event) {
@@ -10,7 +11,8 @@ var inputHandler = function (event) {
   var address = addressInput.value;
   var city = cityInput.value;
   var state = stateInput.value;
-  let requestAddress = `${address} ${city}, ${state}`;
+  var zip = zipInput.value;
+  let requestAddress = `${address} ${city}, ${state} ${zip}`;
   return requestAddress;
 };
 
