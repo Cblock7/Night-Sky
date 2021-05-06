@@ -75,7 +75,7 @@ function getGeoData(requestURL) {
 function pageLoad() {
   userLat = localStorage.getItem("userLat");
   userLong = localStorage.getItem("userLong");
-  if (userLat == "undefined") {
+  if (userLat == "undefined" || userLat == undefined) {
     return;
   } else {
     var userLoc = L.marker([0, 0]).addTo(map);
