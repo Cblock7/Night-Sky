@@ -20,11 +20,11 @@ var iss = L.marker([0, 0], { icon: myIcon }).addTo(map);
 
 function moveISS() {
   $.getJSON(
-    "http://api.open-notify.org/iss-now.json?callback=?",
+    "https://api.wheretheiss.at/v1/satellites/25544",
     function (data) {
-      var lat = data["iss_position"]["latitude"];
+      var lat = data["latitude"];
       ISSLat = lat;
-      var lon = data["iss_position"]["longitude"];
+      var lon = data["longitude"];
       ISSlong = lon;
       ISSDistLoc = L.latLng(ISSLat, ISSlong)
 
@@ -41,12 +41,14 @@ function moveISS() {
       // console.log(distanceBetween) //works
       $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
 
-      var latlngs = Array();
-latlngs.push(userDistLoc);
-latlngs.push(ISSDistLoc);
-var polyline = L.polyline(latlngs, {color: "red"}).addTo(map);
 
-map.fitBounds(polyline.getBounds());
+      //adds a red line between the users location and the ISS location
+      // var latlngs = Array();
+      // latlngs.push(userDistLoc);
+      // latlngs.push(ISSDistLoc);
+      // var polyline = L.polyline(latlngs, {color: "red"}).addTo(map);
+
+      // map.fitBounds(polyline.getBounds());
     }
   );
   setTimeout(moveISS, 5000);
