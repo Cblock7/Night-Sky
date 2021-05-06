@@ -68,5 +68,16 @@ function getGeoData(requestURL) {
     method: "GET",
   }).then(function (response) {
     console.log(response);
+
+    var userLat = response.latt;
+    var userLong = response.longt;
+    // console.log(userLat)
+    // console.log(userLong)
+
+    var userLoc = L.marker([0, 0]).addTo(map);
+    userLoc.setLatLng([userLat, userLong]);
   });
 }
+
+// var userLat = getGeoData.value
+// console.log(userLat)
