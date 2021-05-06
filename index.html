@@ -67,8 +67,16 @@
       <!-- Div for the leaflet liveMap of the ISS location -->
       <div id="liveMap"></div>
 
+      <div class="text-center mt-2">
+        <p>
+          Enter your address to see how far you are from being directly below
+          the International Space Station!
+        </p>
+        <p id="station-distance">Distance To ISS:</p>
+      </div>
+
       <form
-        class="container-fluid d-flex justify-content-space"
+        class="container-fluid d-flex justify-content-around mt-4 mb-4"
         id="submitForm"
       >
         <div class="form-group">
@@ -87,7 +95,7 @@
           <label for="zipArea">Zip Code:</label>
           <input type="text" name="zipArea" id="zipArea" />
         </div>
-        <button type="submit">Find the ISS</button>
+        <button class="btn btn-primary" type="submit">Find the ISS</button>
       </form>
     </main>
 
