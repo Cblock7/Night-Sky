@@ -36,10 +36,17 @@ function moveISS() {
       // console.log(userDistLoc) //works
       // console.log(ISSDistLoc) //works
       
-      // calculates the distance between users location and ISS location and displays it on the page
+      // calculates the distance in miles between users location and ISS location and displays it on the page
       var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
       // console.log(distanceBetween) //works
       $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
+
+      var latlngs = Array();
+latlngs.push(userDistLoc);
+latlngs.push(ISSDistLoc);
+var polyline = L.polyline(latlngs, {color: "red"}).addTo(map);
+
+map.fitBounds(polyline.getBounds());
     }
   );
   setTimeout(moveISS, 5000);
