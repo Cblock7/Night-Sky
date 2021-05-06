@@ -19,11 +19,11 @@ var iss = L.marker([0, 0], { icon: myIcon }).addTo(map);
 
 function moveISS() {
   $.getJSON(
-    "http://api.open-notify.org/iss-now.json?callback=?",
+    "https://api.wheretheiss.at/v1/satellites/25544",
     function (data) {
-      var lat = data["iss_position"]["latitude"];
+      var lat = data["latitude"];
       ISSLat = lat;
-      var lon = data["iss_position"]["longitude"];
+      var lon = data["longitude"];
       ISSlong = lon;
       ISSDistLoc = L.latLng(ISSLat, ISSlong);
 
@@ -34,6 +34,12 @@ function moveISS() {
       var ISSDistLoc = L.latLng(lat, lon);
       // console.log(userDistLoc) //works
       // console.log(ISSDistLoc) //works
+      
+      // calculates the distance in miles between users location and ISS location and displays it on the page
+      var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
+      // console.log(distanceBetween) //works
+      $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
+
 
       // calculates the distance between users location and ISS location and displays it on the page
       var distanceBetween = Math.round(
