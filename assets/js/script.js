@@ -2,6 +2,7 @@ var ISSLat;
 var ISSlong;
 var userLat;
 var userLong;
+var ISSDistLoc;
 var userForm = document.querySelector("#submitForm");
 var addressInput = document.querySelector("#addressArea");
 var cityInput = document.querySelector("#cityArea");
@@ -13,6 +14,9 @@ var myIcon = L.icon({
   iconAnchor: [0, 0],
   popupAnchor: [0, 0],
 });
+var map = L.map("liveMap").setView([0, 0], 1);
+var iss = L.marker([0, 0], { icon: myIcon }).addTo(map);
+
 
 function moveISS() {
   $.getJSON(
@@ -22,24 +26,26 @@ function moveISS() {
       ISSLat = lat;
       var lon = data["iss_position"]["longitude"];
       ISSlong = lon;
+      ISSDistLoc = L.latLng(ISSLat, ISSlong)
 
       iss.setLatLng([lat, lon]);
-      isscirc.setLatLng([lat, lon]);
       map.panTo([lat, lon], (animate = true));
+
+      var userDistLoc = L.latLng(userLat, userLong)
+      var ISSDistLoc = L.latLng(lat, lon)
+      // console.log(userDistLoc) //works
+      // console.log(ISSDistLoc) //works
+      
+      // calculates the distance between users location and ISS location and displays it on the page
+      var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
+      // console.log(distanceBetween) //works
+      $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
     }
   );
   setTimeout(moveISS, 5000);
+
 }
 
-var map = L.map("liveMap").setView([0, 0], 1);
-var iss = L.marker([0, 0], { icon: myIcon }).addTo(map);
-var isscirc = L.circle([0, 0], 2200e3, {
-  color: "#c22",
-  opacity: 0.0,
-  weight: 0,
-  fillColor: "#c22",
-  fillOpacity: 0.0,
-}).addTo(map);
 
 var inputHandler = function (event) {
   event.preventDefault();
@@ -95,4 +101,5 @@ userForm.addEventListener("submit", function (event) {
   let requestAddress = inputHandler(event);
   let requestURL = `https://geocode.xyz/${requestAddress}?json=1`;
   getGeoData(requestURL);
+
 });
