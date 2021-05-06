@@ -14,14 +14,14 @@ function moveISS() {
 }
 
 var myIcon = L.icon({
-    iconUrl: './assets/imgs/ISS-Icon.png',
-    iconSize: [50, 50],
-    iconAnchor: [0, 0],
-    popupAnchor: [0, 0],
+  iconUrl: "./assets/imgs/ISS-Icon.png",
+  iconSize: [50, 50],
+  iconAnchor: [0, 0],
+  popupAnchor: [0, 0],
 });
 
 var map = L.map("liveMap").setView([0, 0], 2);
-var iss = L.marker([0, 0], {icon: myIcon}).addTo(map);
+var iss = L.marker([0, 0], { icon: myIcon }).addTo(map);
 var isscirc = L.circle([0, 0], 2200e3, {
   color: "#c22",
   opacity: 0.0,
