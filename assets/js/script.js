@@ -7,7 +7,7 @@ function moveISS() {
 
       iss.setLatLng([lat, lon]);
       isscirc.setLatLng([lat, lon]);
-      map.panTo([lat, lon], (animate = true));
+      // map.panTo([lat, lon], (animate = true));
     }
   );
   setTimeout(moveISS, 5000);
@@ -82,5 +82,3 @@ function getGeoData(requestURL) {
 }
 
 
-// var userLat = getGeoData.value
-// console.log(userLat)
