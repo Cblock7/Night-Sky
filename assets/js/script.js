@@ -85,7 +85,8 @@ function getGeoData(requestURL) {
     });
 }
 
-function pageLoad() {
+function pageLoad(x) {
+  rescaleFooter(x)
   userLat = localStorage.getItem("userLat");
   userLong = localStorage.getItem("userLong");
   if (userLat == "undefined" || userLat == undefined) {
@@ -96,16 +97,31 @@ function pageLoad() {
   }
 }
 
+function rescaleFooter(x) {
+  if (x.matches) { // If media query matches
+    let footerList = $(".footer-list");
+    footerList.removeClass('flex-row');
+    footerList.attr('class', 'flex-column')
+  } else {
+    let footerList = $(".footer-list");
+    footerList.removeClass('flex-column');
+    footerList.attr('class', 'flex-row')
+  }
+}
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}", {
   foo: "bar",
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+x = window.matchMedia("(max-width: 700px)");
+console.log(x)
 moveISS();
-pageLoad();
+pageLoad(x);
 userForm.addEventListener("submit", function (event) {
   let requestAddress = inputHandler(event);
   let requestURL = `https://geocode.xyz/${requestAddress}?json=1`;
   getGeoData(requestURL);
 });
+x.addListener(rescaleFooter)
