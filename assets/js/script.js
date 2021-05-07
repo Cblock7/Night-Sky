@@ -29,26 +29,23 @@ function moveISS() {
 
       iss.setLatLng([lat, lon]);
       map.panTo([lat, lon], (animate = true));
-
-      var userDistLoc = L.latLng(userLat, userLong);
-      var ISSDistLoc = L.latLng(lat, lon);
-      // console.log(userDistLoc) //works
-      // console.log(ISSDistLoc) //works
       
-      // calculates the distance in miles between users location and ISS location and displays it on the page
-      var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
-      // console.log(distanceBetween) //works
-      $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
+      var ISSDistLoc = L.latLng(lat, lon);
+      
+      if (localStorage.getItem('userLat') != undefined) {
+        var userDistLoc = L.latLng(userLat, userLong);
+        var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
+        // console.log(distanceBetween) //works
+        $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
 
-
-      // calculates the distance between users location and ISS location and displays it on the page
-      var distanceBetween = Math.round(
-        userDistLoc.distanceTo(ISSDistLoc) / 1609
-      );
-      // console.log(distanceBetween) //works
-      $("#station-distance").text(
-        "Distance to ISS: " + distanceBetween + " miles!"
-      );
+        // calculates the distance between users location and ISS location and displays it on the page
+        var distanceBetween = Math.round(
+          userDistLoc.distanceTo(ISSDistLoc) / 1609
+        );
+        $("#station-distance").text(
+          "Distance to ISS: " + distanceBetween + " miles!"
+        );
+      }
     }
   );
   setTimeout(moveISS, 5000);
