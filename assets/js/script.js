@@ -100,12 +100,12 @@ function pageLoad(x) {
 function rescaleFooter(x) {
   if (x.matches) { // If media query matches
     let footerList = $(".footer-list");
-    footerList.removeClass('flex-row');
-    footerList.attr('class', 'flex-column')
+    footerList.removeClass(['flex-row']);
+    footerList.attr('class', 'list-group d-flex flex-column justify-content-center footer-list')
   } else {
     let footerList = $(".footer-list");
-    footerList.removeClass('flex-column');
-    footerList.attr('class', 'flex-row')
+    footerList.removeClass(['flex-column']);
+    footerList.attr('class', 'list-group d-flex flex-row justify-content-center footer-list')
   }
 }
 
