@@ -6,6 +6,10 @@ body {
   padding: 0px;
 }
 
+.navbar {
+  padding: 1vh 1vw;
+}
+
 #liveMap {
   height: 40vh;
   margin-left: 25vw;
