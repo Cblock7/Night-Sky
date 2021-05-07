@@ -61,3 +61,10 @@
     flex-wrap: wrap;
   }
 }
+
+@media screen and (max-width: 900px) {
+  #liveMap {
+    margin-left: 5vw;
+    width: 90vw;
+  }
+}
