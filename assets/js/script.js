@@ -116,7 +116,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}", {
 }).addTo(map);
 
 x = window.matchMedia("(max-width: 700px)");
-console.log(x)
 moveISS();
 pageLoad(x);
 userForm.addEventListener("submit", function (event) {
