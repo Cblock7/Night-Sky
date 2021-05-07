@@ -29,26 +29,23 @@ function moveISS() {
 
       iss.setLatLng([lat, lon]);
       map.panTo([lat, lon], (animate = true));
-
-      var userDistLoc = L.latLng(userLat, userLong);
-      var ISSDistLoc = L.latLng(lat, lon);
-      // console.log(userDistLoc) //works
-      // console.log(ISSDistLoc) //works
       
-      // calculates the distance in miles between users location and ISS location and displays it on the page
-      var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
-      // console.log(distanceBetween) //works
-      $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
+      var ISSDistLoc = L.latLng(lat, lon);
+      
+      if (localStorage.getItem('userLat') != undefined) {
+        var userDistLoc = L.latLng(userLat, userLong);
+        var distanceBetween = Math.round(userDistLoc.distanceTo(ISSDistLoc) / 1609)
+        // console.log(distanceBetween) //works
+        $("#station-distance").text("Distance to ISS: " + distanceBetween + " miles!")
 
-
-      // calculates the distance between users location and ISS location and displays it on the page
-      var distanceBetween = Math.round(
-        userDistLoc.distanceTo(ISSDistLoc) / 1609
-      );
-      // console.log(distanceBetween) //works
-      $("#station-distance").text(
-        "Distance to ISS: " + distanceBetween + " miles!"
-      );
+        // calculates the distance between users location and ISS location and displays it on the page
+        var distanceBetween = Math.round(
+          userDistLoc.distanceTo(ISSDistLoc) / 1609
+        );
+        $("#station-distance").text(
+          "Distance to ISS: " + distanceBetween + " miles!"
+        );
+      }
     }
   );
   setTimeout(moveISS, 5000);
@@ -85,7 +82,8 @@ function getGeoData(requestURL) {
     });
 }
 
-function pageLoad() {
+function pageLoad(x) {
+  rescaleFooter(x)
   userLat = localStorage.getItem("userLat");
   userLong = localStorage.getItem("userLong");
   if (userLat == "undefined" || userLat == undefined) {
@@ -96,16 +94,30 @@ function pageLoad() {
   }
 }
 
+function rescaleFooter(x) {
+  if (x.matches) { // If media query matches
+    let footerList = $(".footer-list");
+    footerList.removeClass(['flex-row']);
+    footerList.attr('class', 'list-group d-flex flex-column justify-content-center footer-list')
+  } else {
+    let footerList = $(".footer-list");
+    footerList.removeClass(['flex-column']);
+    footerList.attr('class', 'list-group d-flex flex-row justify-content-center footer-list')
+  }
+}
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}", {
   foo: "bar",
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+x = window.matchMedia("(max-width: 700px)");
 moveISS();
-pageLoad();
+pageLoad(x);
 userForm.addEventListener("submit", function (event) {
   let requestAddress = inputHandler(event);
   let requestURL = `https://geocode.xyz/${requestAddress}?json=1`;
   getGeoData(requestURL);
 });
+x.addListener(rescaleFooter)
