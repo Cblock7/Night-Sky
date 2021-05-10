@@ -16,21 +16,12 @@ No special steps for installation as this project is a web application that runs
 
 Upon launching the web application, users simply need to enter their physical street address into the applicable search fields and click "Find the ISS". The map will then display your location and its relation to the International Space Station!
 
-Here is the link to the page:
+Here is the link to the page: [https://cblock7.github.io/Night-Sky/](https://cblock7.github.io/Night-Sky/)
 
 Here is a screenshot of the page:
-```md
-![alt text](assets/images/screenshot.png)
 
-```
+![screenshot of the home page with sample functionality](./assets/imgs/home_screenshot.png)
+
 ## Credit
 
 Our project was made possible by utilization of the API from Open Notify (http://open-notify.org/Open-Notify-API/) and the API from Geocode xyz (https://geocode.xyz/). We also enlisted the Open Street Map (https://www.openstreetmap.org/) to verify user coordinates for the location process.
-
-
-## License
-
-## Tests
-
-
-```
