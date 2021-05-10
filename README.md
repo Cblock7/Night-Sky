@@ -24,4 +24,4 @@ Here is a screenshot of the page:
 
 ## Credit
 
-Our project was made possible by utilization of the API from Open Notify (http://open-notify.org/Open-Notify-API/) and the API from Geocode xyz (https://geocode.xyz/). We also enlisted the Open Street Map (https://www.openstreetmap.org/) to verify user coordinates for the location process.
+Our project was made possible by utilization of the API from Where ISS At? (https://wheretheiss.at/w/developer) and the API from Geocode xyz (https://geocode.xyz/). We also enlisted the Open Street Map (https://www.openstreetmap.org/) to verify user coordinates for the location process.
